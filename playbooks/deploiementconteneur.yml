@@ -1,0 +1,48 @@
+---
+- name: Créer les conteneurs Prometheus, Grafana et AlertManager avec IP statique et noms personnalisés
+  hosts: localhost
+  become: yes
+  tasks:
+
+    # Créer le conteneur Prometheus avec une IP statique et un nom personnalisé
+    - name: Créer le conteneur Prometheus avec IP statique
+      docker_container:
+        name: prometheus   # Nom personnalisé du conteneur
+        image: prom/prometheus:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: projetsae
+            ipv4_address: "192.168.10.4"  # Adresse IP pour Prometheus
+        ports:
+          - "9090:9090"  # Exposer le port de Prometheus pour l'accès à l'interface web
+
+    # Créer le conteneur Grafana avec une IP statique, un nom personnalisé, et un login/password
+    - name: Créer le conteneur Grafana avec IP statique et login/password
+      docker_container:
+        name: grafana      # Nom personnalisé du conteneur
+        image: grafana/grafana:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: projetsae
+            ipv4_address: "192.168.10.5"  # Adresse IP pour Grafana
+        ports:
+          - "3000:3000"  # Exposer le port de Grafana pour l'accès à l'interface web
+        env:
+          GF_SECURITY_ADMIN_USER: "admin"     # Utilisateur admin pour Grafana
+          GF_SECURITY_ADMIN_PASSWORD: "quentin" # Mot de passe pour l'utilisateur admin de Grafana
+
+    # Créer le conteneur AlertManager avec une IP statique et un nom personnalisé
+    - name: Créer le conteneur AlertManager avec IP statique
+      docker_container:
+        name: alertmanager # Nom personnalisé du conteneur
+        image: prom/alertmanager:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: projetsae
+            ipv4_address: "192.168.10.6"  # Adresse IP pour AlertManager
+        ports:
+          - "9093:9093"  # Exposer le port d'AlertManager pour l'accès à l'interface web
+
