@@ -1,0 +1,6 @@
+---
+- name: Configurer Prometheus avec un rôle
+  hosts: localhost
+  become: yes
+  roles:
+    - prometheus

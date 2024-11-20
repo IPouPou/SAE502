@@ -1,0 +1,9 @@
+---
+- name: Copier prometheus.yml dans le conteneur Prometheus
+  command: docker cp "{{ role_path }}/files/prometheus.yml" prometheus:/etc/prometheus/prometheus.yml
+
+- name: Redémarrer le conteneur Prometheus
+  docker_container:
+    name: prometheus
+    state: started
+    restart: yes
