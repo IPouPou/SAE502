@@ -1,0 +1,56 @@
+---
+- name: Création d'un tableau de bord Grafana
+  hosts: localhost
+  tasks:
+    - name: Créer un tableau de bord dans Grafana
+      uri:
+        url: "http://192.168.10.5:3000/api/dashboards/db"
+        method: POST
+        user: "admin"
+        password: "quentin"
+        force_basic_auth: true
+        headers:
+          Content-Type: "application/json"
+        body: |
+          {
+            "dashboard": {
+              "id": null,
+              "uid": null,
+              "title": "Mon Tableau de Bord Ansible",
+              "tags": ["ansible", "automation"],
+              "timezone": "browser",
+              "schemaVersion": 36,
+              "version": 0,
+              "panels": [
+                {
+                  "type": "graph",
+                  "title": "Requêtes HTTP",
+                  "gridPos": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 8
+                  },
+                  "fieldConfig": {
+                    "defaults": {
+                      "custom": {
+                        "drawStyle": "line",
+                        "lineWidth": 2
+                      }
+                    }
+                  },
+                  "targets": [
+                    {
+                      "expr": "go_gc_heap_allocs_bytes_total{instance='192.168.10.5:3000'}",
+                      "legendFormat": "{{'{{'}}instance{{'}}'}}",
+                      "refId": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            "overwrite": true
+          }
+        body_format: json
+        status_code: 200
+        validate_certs: false

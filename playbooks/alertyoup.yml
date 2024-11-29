@@ -1,0 +1,24 @@
+---
+- name: Déployer la configuration et les règles d'alerte pour Prometheus
+  hosts: localhost
+  tasks:
+    - name: S'assurer que le conteneur Prometheus est démarré
+      docker_container:
+        name: prometheus
+        state: started
+
+    - name: Copier prometheus.yml dans le conteneur Prometheus
+      command: docker cp "../roles/prometheus/files/prometheus.yml" prometheus:/etc/prometheus/prometheus.yml
+
+    - name: Copier alert_rules.yml dans le conteneur Prometheus
+      command: docker cp "../roles/prometheus/files/alert_rules.yml" prometheus:/etc/prometheus/alert_rules.yml
+
+    - name: Arrêter le conteneur Prometheus
+      docker_container:
+        name: prometheus
+        state: stopped
+
+    - name: Démarrer le conteneur Prometheus
+      docker_container:
+        name: prometheus
+        state: started

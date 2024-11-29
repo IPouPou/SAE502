@@ -1,0 +1,11 @@
+groups:
+- name: heap_alerts
+  rules:
+  - alert: HighHeapAllocation
+    expr: go_gc_heap_allocs_bytes_total > 2700000
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Allocation mémoire GC élevée"
+      description: "La métrique go_gc_heap_allocs_bytes_total a dépassé 270000000."

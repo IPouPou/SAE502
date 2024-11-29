@@ -12,3 +12,6 @@ scrape_configs:
       - targets:
           - '192.168.10.5:3000'  # Grafana
           - '192.168.10.6:9093'  # AlertManager
+
+rule_files:
+  - "alert_rules.yml"
