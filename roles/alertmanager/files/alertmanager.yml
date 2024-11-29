@@ -1,0 +1,25 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname']
+  receiver: 'email-alert'
+  continue: false
+  routes:
+    - match:
+        severity: "critical"  # Cette route enverra les alertes de niveau "critical"
+      receiver: 'email-alert'
+    - match:
+        severity: "warning"  # Cette route enverra également les alertes de niveau "warning"
+      receiver: 'email-alert'
+
+
+receivers:
+- name: 'email-alert'
+  email_configs:
+  - send_resolved: true
+    to: 'sae502quentin@gmail.com'
+    from: 'sae502quentin@gmail.com'
+    smarthost: 'smtp.gmail.com:587'
+    auth_username: 'sae502quentin@gmail.com'
+    auth_password: 'jmqjtsefdfxhxpkd'

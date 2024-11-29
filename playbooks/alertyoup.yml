@@ -22,3 +22,16 @@
       docker_container:
         name: prometheus
         state: started
+
+    - name: Copier alertmanager.yml dans le conteneur Alertmanager
+      command: docker cp "../roles/alertmanager/files/alertmanager.yml" alertmanager:/etc/alertmanager/alertmanager.yml
+
+    - name: Arreter le conteneur Alertmanager
+      docker_container:
+        name: alertmanager
+        state: stopped
+
+    - name: Démarrer le conteneur Alertmanager
+      docker_container:
+        name: alertmanager
+        state: started
