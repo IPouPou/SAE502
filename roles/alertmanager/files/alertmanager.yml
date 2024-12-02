@@ -12,7 +12,8 @@ route:
     - match:
         severity: "warning"  # Cette route enverra également les alertes de niveau "warning"
       receiver: 'email-alert'
-
+    - match:
+        alertname: trop_de_laod
 
 receivers:
 - name: 'email-alert'
