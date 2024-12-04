@@ -2,7 +2,7 @@ groups:
 - name: heap_and_network_alerts
   rules:
   - alert: trop_de_load
-    expr: node_load1 > 0.6
+    expr: node_load1 > 0.8
     for: 1m
     labels:
       severity: critical
@@ -11,7 +11,7 @@ groups:
       description: "La charge du système (node_load1) a dépassé 0.6 pendant 1 minute."
 
   - alert: HighTcpConnections
-    expr: node_netstat_Tcp_CurrEstab > 5
+    expr: node_netstat_Tcp_CurrEstab > 100
     for: 2m
     labels:
       severity: critical
@@ -21,4 +21,12 @@ groups:
         Le nombre de connexions TCP établies a dépassé 100.
         Cela pourrait indiquer une surcharge ou une attaque potentielle (ex. DDoS).
 
-
+  - alert: HighMemoryUsage
+    expr: 100 * (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Utilisation mémoire élevée"
+      description: >
+        La mémoire utilisée dépasse 80 %.
