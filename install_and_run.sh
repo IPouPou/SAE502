@@ -55,6 +55,6 @@ echo "Lancement des playbooks..."
 
 ansible-playbook playbooks/dockernetworkcreate.yml
 ansible-playbook -i inventaire.ini playbooks/deploiementconteneur.yml
-ansible-playbook playbooks/configprometheus.yml
-ansible-playbook playbooks/grafanaconfig.yml
-ansible-playbook playbooks/alertmanager.yml
+ansible-playbook -i inventaire.ini playbooks/configprometheus.yml
+ansible-playbook -i inventaire.ini playbooks/grafanaconfig.yml
+ansible-playbook -i inventaire.ini playbooks/alertmanager.yml
