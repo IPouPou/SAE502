@@ -30,3 +30,23 @@ groups:
       summary: "Utilisation mémoire élevée"
       description: >
         La mémoire utilisée dépasse 80 %.
+
+
+  - alert: HighNetworkReceiveErrors
+    expr: rate(node_network_receive_errs_total[1m]) > 10
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High number of network receive errors detected ."
+
+
+  - alert: HighDiskUsage
+    expr: 100 * (node_filesystem_size_bytes{fstype!~"tmpfs|fuse.*"} - node_filesystem_free_bytes{fstype!~"tmpfs|fuse.*"}) / node_filesystem_size_bytes{fstype!~"tmpfs|fuse.*"} > 80
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High disk usage."
+      description: "Disk usage is above 80%  for the last 5 minutes."
+

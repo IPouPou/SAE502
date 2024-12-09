@@ -1,23 +1,25 @@
 - name: Ajouter la source de données Prometheus
-      uri:
-        url: "http://192.168.10.5:3000/api/datasources"
-        method: POST
-        user: "admin"
-        password: "quentin"
-        force_basic_auth: true
-        headers:
-          Content-Type: "application/json"
-        body: |
-          {
-            "name": "Prometheus",
-            "type": "prometheus",
-            "url": "http://192.168.10.4:9090",
-            "access": "proxy",
-            "isDefault": true
-          }
-        body_format: json
-        status_code: 200
-        validate_certs: false
+  uri:
+    url: "http://192.168.10.5:3000/api/datasources"
+    method: POST
+    user: "admin"
+    password: "quentin"
+    force_basic_auth: true
+    headers:
+      Content-Type: "application/json"
+    body: |
+      {
+        "name": "Prometheus",
+        "type": "prometheus",
+        "url": "http://192.168.10.4:9090",
+        "access": "proxy",
+        "isDefault": true
+      }
+    body_format: json
+    status_code: 200
+    validate_certs: false
 
 - name: Créer le tableau de bord Grafana
   include_tasks: createdashboard.yml
+  include_tasks: dashboard_error_network.yml
+  include_tasks: dashboard_disk_usage.yml
