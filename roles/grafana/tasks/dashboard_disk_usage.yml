@@ -1,6 +1,6 @@
 - name: Créer un tableau de bord dans Grafana
   uri:
-    url: "http://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:3000/api/dashboards/db"
+    url: "http://{{ groups['grafana'][0] }}:3000/api/dashboards/db"
     method: POST
     user: "admin"
     password: "quentin"

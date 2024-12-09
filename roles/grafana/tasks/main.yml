@@ -1,6 +1,6 @@
 - name: Ajouter la source de données Prometheus
   uri:
-    url: "http://192.168.10.5:3000/api/datasources"
+    url: "http://{{ groups['grafana'][0] }}:3000/api/datasources"
     method: POST
     user: "admin"
     password: "quentin"
@@ -11,7 +11,7 @@
       {
         "name": "Prometheus",
         "type": "prometheus",
-        "url": "http://{{ hostvars['prometheus']['ansible_default_ipv4']['address'] }}:9090",
+        "url": "http://{{ groups['prometheus'][0] }}:9090",
         "access": "proxy",
         "isDefault": true
       }

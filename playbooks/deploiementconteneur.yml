@@ -2,10 +2,6 @@
 - name: Créer les conteneurs Prometheus, Grafana et AlertManager avec IP statique et noms personnalisés
   hosts: localhost
   become: yes
-  vars:
-    prometheus_ip: "{{ hostvars['prometheus']['ansible_host'] }}"
-    grafana_ip: "{{ hostvars['grafana']['ansible_host'] }}"
-    alertmanager_ip: "{{ hostvars['alertmanager']['ansible_host'] }}"
   tasks:
 
     # Créer le conteneur Prometheus avec une IP statique et un nom personnalisé
@@ -17,7 +13,7 @@
         restart_policy: always
         networks:
           - name: projetsae
-            ipv4_address: "{{ prometheus_ip }}"  # Adresse IP pour Prometheus
+            ipv4_address: "{{ groups['prometheus'][0] }}"  # Adresse IP pour Prometheus
         ports:
           - "9090:9090"  # Exposer le port de Prometheus pour l'accès à l'interface web
 
@@ -30,7 +26,7 @@
         restart_policy: always
         networks:
           - name: projetsae
-            ipv4_address: "{{ grafana_ip }}"  # Adresse IP pour Grafana
+            ipv4_address: "{{ groups['grafana'][0] }}"  # Adresse IP pour Grafana
         ports:
           - "3000:3000"  # Exposer le port de Grafana pour l'accès à l'interface web
         env:
@@ -46,7 +42,7 @@
         restart_policy: always
         networks:
           - name: projetsae
-            ipv4_address: "{{ alertmanager_ip }}"  # Adresse IP pour AlertManager
+            ipv4_address: "{{ groups['alertmanager'][0] }}"  # Adresse IP pour AlertManager
         ports:
           - "9093:9093"  # Exposer le port d'AlertManager pour l'accès à l'interface web
 
