@@ -7,3 +7,6 @@
     name: prometheus
     state: started
     restart: yes
+
+- name: Déployer la configuration et les règles d'alerte pour Prometheus
+  include_tasks: deployconfig.yml

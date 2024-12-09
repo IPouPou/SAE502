@@ -1,0 +1,6 @@
+---
+- name: Configurer et déployer Prometheus
+  hosts: localhost
+  become: yes
+  roles:
+    - prometheus
