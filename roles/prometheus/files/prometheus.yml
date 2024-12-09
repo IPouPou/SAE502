@@ -16,7 +16,7 @@ scrape_configs:
   - job_name: 'machines'
     static_configs:
       - targets:
-          - '{{ hostvars['hote']['ansible_default_ipv4']['address'] }}:9100'
+          - "{{ hostvars['hote']['ansible_default_ipv4']['address'] }}:9100"
 
 rule_files:
   - "alert_rules.yml"
