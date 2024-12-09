@@ -50,6 +50,50 @@ sudo apt install -y tree
 echo "Vérification de l'installation de Tree..."
 tree --version
 
+
+
+# Installation de Node Exporter
+echo "Installation de Node Exporter..."
+
+# Télécharger la dernière version de Node Exporter
+wget https://github.com/prometheus/node_exporter/releases/download/v1.4.0/node_exporter-1.4.0.linux-amd64.tar.gz
+
+# Extraire l'archive téléchargée
+tar xvfz node_exporter-1.4.0.linux-amd64.tar.gz
+
+# Déplacer les fichiers extraits vers le répertoire /usr/local/bin
+sudo mv node_exporter-1.4.0.linux-amd64/node_exporter /usr/local/bin/
+
+# Supprimer les fichiers d'archive et les fichiers temporaires
+rm -rf node_exporter-1.4.0.linux-amd64.tar.gz node_exporter-1.4.0.linux-amd64
+
+# Créer un fichier de service systemd pour Node Exporter
+echo "[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=default.target" | sudo tee /etc/systemd/system/node_exporter.service
+
+# Recharger systemd pour prendre en compte le nouveau service
+sudo systemctl daemon-reload
+
+# Activer et démarrer le service Node Exporter
+echo "Démarrage de Node Exporter..."
+sudo systemctl enable node_exporter
+sudo systemctl start node_exporter
+
+# Vérifier si Node Exporter fonctionne
+echo "Vérification du service Node Exporter..."
+sudo systemctl status node_exporter
+
+echo "Installation terminée !"
+
+
 # Lancement des playbooks
 echo "Lancement des playbooks..."
 
