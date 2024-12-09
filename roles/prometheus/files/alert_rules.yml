@@ -1,14 +1,14 @@
 groups:
 - name: heap_and_network_alerts
   rules:
-  - alert: trop_de_load
+  - alert: TropDeLoad
     expr: node_load1 > 0.8
     for: 1m
     labels:
       severity: critical
     annotations:
-      summary: "TEstYUp trop de load"
-      description: "La charge du système (node_load1) a dépassé 0.6 pendant 1 minute."
+      summary: "Trop de load"
+      description: "La charge du système  a dépassé 0.8 pendant 1 minute."
 
   - alert: HighTcpConnections
     expr: node_netstat_Tcp_CurrEstab > 100
@@ -18,7 +18,7 @@ groups:
     annotations:
       summary: "Nombre élevé de connexions TCP établies"
       description: >
-        Le nombre de connexions TCP établies a dépassé 100.
+        Le nombre de connexions TCP établies a dépassé 10.
         Cela pourrait indiquer une surcharge ou une attaque potentielle (ex. DDoS).
 
   - alert: HighMemoryUsage

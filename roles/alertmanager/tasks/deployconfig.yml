@@ -5,7 +5,7 @@
     state: started
 
 - name: Copier alertmanager.yml dans le conteneur Alertmanager
-  command: docker cp "../files/alertmanager.yml" alertmanager:/etc/alertmanager/alertmanager.yml
+  command: docker cp "{{ role_path }}/files/alertmanager.yml" alertmanager:/etc/alertmanager/alertmanager.yml
 
 - name: Arrêter le conteneur Alertmanager
   docker_container:

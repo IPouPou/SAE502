@@ -5,10 +5,10 @@
     state: started
 
 - name: Copier prometheus.yml dans le conteneur Prometheus
-  command: docker cp "../files/prometheus.yml" prometheus:/etc/prometheus/prometheus.yml
+  command: docker cp "{{ role_path }}/files/prometheus.yml" prometheus:/etc/prometheus/prometheus.yml
 
 - name: Copier alert_rules.yml dans le conteneur Prometheus
-  command: docker cp "../files/alert_rules.yml" prometheus:/etc/prometheus/alert_rules.yml
+  command: docker cp "{{ role_path }}/files/alert_rules.yml" prometheus:/etc/prometheus/alert_rules.yml
 
 - name: Arrêter le conteneur Prometheus
   docker_container:
