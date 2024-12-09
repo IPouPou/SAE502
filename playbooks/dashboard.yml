@@ -51,29 +51,6 @@
                       "refId": "A"
                     }
                   ]
-                },
-                {
-                  "type": "graph",
-                  "title": "Mémoire disponible (bytes)",
-                  "gridPos": {
-                    "x": 0,
-                    "y": 8,
-                    "w": 12,
-                    "h": 8
-                  },
-                  "fieldConfig": {
-                    "defaults": {
-                      "unit": "bytes",
-                      "color": {"mode": "palette-classic"}
-                    }
-                  },
-                  "targets": [
-                    {
-                      "expr": "node_memory_MemAvailable_bytes",
-                      "legendFormat": "Mémoire disponible",
-                      "refId": "B"
-                    }
-                  ]
                 }
               ]
             },
