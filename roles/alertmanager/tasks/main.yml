@@ -1,0 +1,3 @@
+---
+- name: Déployer la configuration pour Alertmanager
+  include_tasks: deployconfig.yml

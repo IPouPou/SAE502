@@ -1,0 +1,6 @@
+---
+- name: Configurer et déployer Alertmanager
+  hosts: localhost
+  become: yes
+  roles:
+    - alertmanager
