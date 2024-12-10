@@ -19,7 +19,15 @@
     status_code: 200
     validate_certs: false
 
-- name: Créer le tableau de bord Grafana
-  include_tasks: createdashboard.yml
-  include_tasks: dashboard_error_network.yml
-  include_tasks: dashboard_disk_usage.yml
+- block:
+    - name: Créer le tableau de bord principal
+      include_tasks: createdashboard.yml
+
+    - name: Créer le tableau de bord "Error Network"
+      include_tasks: dashboard_error_network.yml
+
+    - name: Créer le tableau de bord "Disk Usage"
+      include_tasks: dashboard_disk_usage.yml
+  rescue:
+    - debug:
+        msg: "Une tâche a échoué, mais nous continuons avec les suivantes."

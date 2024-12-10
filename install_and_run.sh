@@ -88,9 +88,6 @@ sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
 
 # Vérifier si Node Exporter fonctionne
-echo "Vérification du service Node Exporter..."
-sudo systemctl status node_exporter
-
 echo "Installation terminée !"
 
 
