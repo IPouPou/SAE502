@@ -45,13 +45,16 @@ Voici un exemple de la structure du fichier `inventaire.ini` :
 
 ```ini
 [grafana]
-grafana_ip=192.168.1.100
+192.168.10.5
 
 [prometheus]
-prometheus_ip=192.168.1.101
+192.168.10.4
 
 [alertmanager]
-alertmanager_ip=192.168.1.102
+192.168.10.6
+
+[hote]
+10.0.2.15
 ```
 
 
