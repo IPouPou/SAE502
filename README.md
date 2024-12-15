@@ -29,13 +29,20 @@ Vous pouvez installer Git en suivant les instructions pour votre système d'expl
 git clone https://github.com/IPouPou/SAE502.git
 cd SAE502
 ```
-## Configuration du réseau Docker
+### Configuration du réseau Docker
 
 Dans le fichier `networkcreate`, vous pouvez modifier le **nom** et l'**IP** du réseau Docker sur lequel vos conteneurs seront déployés.  
 Cela vous permet de personnaliser les paramètres du réseau Docker, notamment pour adapter l'IP du réseau à votre environnement.
-
-
-## Configuration des IP des services
+```ini
+ - name: Créer un réseau Docker
+      community.docker.docker_network:
+        name: projetsae
+        driver: bridge
+        ipam_config:
+          - subnet: 192.168.10.0/24
+        state: present
+```
+### Configuration des IP des services
 
 Dans le fichier `inventaire.ini`, vous trouverez les adresses IP des services **Grafana**, **Prometheus** et **Alertmanager**.  
 Si vous avez choisi des adresses IP différentes pour ces services lors de la création des conteneurs, vous devez modifier ce fichier pour qu'il corresponde aux adresses IP définies dans le fichier de déploiement des conteneurs.
@@ -63,6 +70,7 @@ Voici un exemple de la structure du fichier `inventaire.ini` :
 ```bash
 ./install_and_run.sh
 ```
+---
 ## Utilisation  
 
 Une fois l'installation terminée, accédez aux services via votre navigateur :  
