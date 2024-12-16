@@ -8,7 +8,7 @@ Grâce à cet environnement, il est possible de :
 - Collecter des métriques.  
 - Gérer des alertes avec **Grafana**, **Prometheus** et **Alertmanager**.  
 
-Le projet repose sur des technologies modernes telles que **Docker** et **Ansible**, garantissant une installation rapide et une configuration reproductible.  
+Le projet les technologies  telles que **Docker** et **Ansible**, garantissant une installation rapide et une configuration reproductible.  
 
 ---
 
@@ -41,14 +41,14 @@ cd SAE502
 ## Utilisation  
 Une fois l'installation terminée, accédez aux services via votre navigateur :  
 
-- **Grafana** : [http://<votre-ip>:3000](http://<votre-ip>:3000)  
-- **Prometheus** : [http://<votre-ip>:9090](http://<votre-ip>:9090)  
-- **Alertmanager** : [http://<votre-ip>:9093](http://<votre-ip>:9093)  
+- **Grafana** : [http://ip_grafana:3000](http://<votre-ip>:3000)  
+- **Prometheus** : [http://ip_prometheus:9090](http://<votre-ip>:9090)  
+- **Alertmanager** : [http://ip_alertmanager:9093](http://<votre-ip>:9093)  
 Utilisez les identifiants par défaut configurés dans le projet ou référez-vous à la documentation pour les personnaliser.  
 ---
 
 
-## Fichier a vérifier/modifier avec d'installer
+## Fichier a vérifier/modifier avant d'installer
 
 ### Configuration du réseau Docker
 
@@ -84,4 +84,52 @@ Voici un exemple de la structure du fichier `inventaire.ini` :
 [hote]
 10.0.2.15
 ```
+### Configuration des Targets de prometheus
+
+Dans le fichier `roles/prometheus/files/prometheus.yml`, vous devez modifier les adresses IP pour qu'elles correspondent aux IP globales définies lors de la configuration des services. Ce fichier configure Prometheus pour collecter des métriques et gérer les alertes.  
+
+Voici un extrait du fichier :  
+
+```yaml
+scrape_interval: 15s
+evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'docker_services'
+    static_configs:
+      - targets:
+          - "192.168.10.5:3000"  # Grafana
+          - "192.168.10.6:9093"  # AlertManager
+
+  - job_name: 'machines'
+    static_configs:
+      - targets:
+          - "10.0.2.15:9100"
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - "192.168.10.6:9093"
+```
+**Modifications à effectuer**
+
+**Grafana** : Remplacez l'IP 192.168.10.5:3000 par l'adresse IP globale que vous avez définie pour Grafana.
+
+**AlertManager** : Remplacez l'IP 192.168.10.6:9093 par l'adresse IP globale que vous avez définie pour AlertManager.
+
+**Machines** : Si vous collectez des métriques sur d'autres machines, ajoutez ou modifiez les cibles sous le job machines.
+
+**Note** : Assurez-vous que les IP modifiées dans ce fichier sont cohérentes avec celles définies dans le fichier inventaire.ini et dans la configuration du réseau Docker.
+---
+## Explication du script install_and_run
+
+
 
