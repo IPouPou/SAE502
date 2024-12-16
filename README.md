@@ -154,3 +154,59 @@ Le script `install_and_run.sh` automatise l'installation et la configuration des
 Une fois le script exécuté, tous les outils et services nécessaires seront installés, configurés, et prêts à l'emploi.  
 
 
+## Arborescence du Projet
+
+Voici la structure des fichiers et répertoires du projet :  
+
+```plaintext
+├── playbooks/                # Contient les playbooks Ansible pour l'installation et la configuration  
+│   ├── alertmanager.yml            # Déploie et configure Alertmanager  
+│   ├── configprometheus.yml        # Configure Prometheus  
+│   ├── deploiementconteneur.yml    # Déploie les conteneurs Docker  
+│   ├── dockernetworkcreate.yml     # Crée le réseau Docker  
+│   └── grafanaconfig.yml           # Configure Grafana  
+
+├── roles/                    # Contient les rôles Ansible pour chaque service  
+│   ├── alertmanager/               # Rôle pour Alertmanager  
+│   │   ├── files/  
+│   │   │   └── alertmanager.yml    # Fichier de configuration Alertmanager  
+│   │   └── tasks/  
+│   │       ├── deployconfig.yml    # Tâches pour déployer Alertmanager  
+│   │       └── main.yml            # Point d'entrée des tâches Alertmanager  
+
+│   ├── grafana/                   # Rôle pour Grafana  
+│   │   └── tasks/  
+│   │       ├── createdashboard.yml         # Crée un dashboard dans Grafana  
+│   │       ├── dashboard_disk_usage.yml    # Dashboard d'utilisation disque  
+│   │       ├── dashboard_error_network.yml # Dashboard d'erreurs réseau  
+│   │       └── main.yml                    # Point d'entrée des tâches Grafana  
+
+│   └── prometheus/                # Rôle pour Prometheus  
+│       ├── files/  
+│       │   ├── alert_rules.yml    # Règles d'alertes pour Prometheus  
+│       │   └── prometheus.yml     # Fichier de configuration Prometheus  
+│       └── tasks/  
+│           ├── deployconfig.yml   # Tâches pour configurer Prometheus  
+│           └── main.yml           # Point d'entrée des tâches Prometheus  
+
+├── README.md                 # Documentation du projet  
+├── ansible.cfg               # Configuration globale d'Ansible  
+├── install_and_run.sh        # Script d'installation et d'exécution du projet  
+└── inventaire.ini            # Fichier d'inventaire contenant les IP des services
+```
+**Explication des répertoires** :
+
+   **playbooks/** : Contient les différents playbooks Ansible utilisés pour déployer et configurer les services.
+   
+   **roles/** : Chaque sous-dossier représente un rôle Ansible (Alertmanager, Grafana, Prometheus) avec leurs fichiers et tâches respectifs.
+   
+   **files/**: Contient les fichiers de configuration (ex : prometheus.yml).
+   
+   **tasks/** : Décrit les tâches d'installation et de configuration exécutées par Ansible.
+   
+   **ansible.cfg** : Fichier de configuration pour Ansible.
+
+   **install_and_run.sh** : Script Bash automatisant l'installation des dépendances et l'exécution des playbooks Ansible.
+   
+   **inventaire.ini**: Définit les adresses IP des services (à adapter selon votre configuration réseau).
+   
