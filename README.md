@@ -129,7 +129,28 @@ alerting:
 
 **Note** : Assurez-vous que les IP modifiées dans ce fichier sont cohérentes avec celles définies dans le fichier inventaire.ini et dans la configuration du réseau Docker.
 ---
-## Explication du script install_and_run
 
+## Fonctionnement du script d'installation
+
+Le script `install_and_run.sh` automatise l'installation et la configuration des outils nécessaires au projet. Voici les principales étapes :  
+
+1. **Mise à jour des packages**  
+   - Met à jour les packages existants sur le système.  
+
+2. **Installation des dépendances**  
+   - Installe Docker, Ansible, et Tree.  
+   - Configure et vérifie leur installation.  
+
+3. **Installation de Node Exporter**  
+   - Télécharge, configure, et démarre le service Node Exporter pour la collecte de métriques.  
+
+4. **Déploiement et configuration des services**  
+   - Exécute une série de playbooks Ansible pour :  
+     - Créer le réseau Docker.  
+     - Déployer les conteneurs nécessaires (Grafana, Prometheus, AlertManager).  
+     - Configurer Prometheus, Grafana, et AlertManager.  
+
+### Résultat :  
+Une fois le script exécuté, tous les outils et services nécessaires seront installés, configurés, et prêts à l'emploi.  
 
 
