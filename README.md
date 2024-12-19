@@ -21,6 +21,37 @@ Le projet les technologies  telles que **Docker** et **Ansible**, garantissant u
 
 ---
 
+
+## Résultat du Projet : Ce que vous obtiendrez
+
+Avec ce projet, vous déploierez un environnement de supervision complet comprenant les services suivants :  
+
+### 1. **Serveur Grafana**
+Un serveur Grafana configuré avec plusieurs dashboards permettant de visualiser :  
+- L'état de l'espace de stockage  
+- L'utilisation du CPU  
+- Les connexions TCP  
+- L'utilisation de la mémoire  
+
+Ces dashboards vous offrent une vue d'ensemble de vos systèmes et conteneurs en temps réel.  
+
+### 2. **Serveur Prometheus**
+Un serveur Prometheus collectant des métriques provenant :  
+- Des conteneurs Docker  
+- Du réseau (via Node Exporter ) 
+
+Prometheus est configuré avec des alertes pour surveiller l'état de votre infrastructure. Vous serez averti en cas de :  
+- Charge système (load) trop élevée  
+- Espace disque insuffisant  
+- Tentative de DDoS (nombre excessif de connexions TCP)  
+- Utilisation excessive de la mémoire  
+
+### 3. **Serveur Alertmanager**
+Un serveur Alertmanager configuré pour gérer les alertes générées par Prometheus.  
+En fonction de la gravité des alertes, vous recevrez des notifications par email. Cela permet de prioriser les actions nécessaires pour résoudre les problèmes détectés.  
+
+---
+
 ## Récupérer le dépot  
 ### Prérequis  
 Avant de cloner le dépôt, assurez-vous d'avoir **Git** installé sur votre machine.  
