@@ -161,6 +161,25 @@ alerting:
 **Note** : Assurez-vous que les IP modifiées dans ce fichier sont cohérentes avec celles définies dans le fichier inventaire.ini et dans la configuration du réseau Docker.
 ---
 
+### Configuration des Notifications par Email
+
+Le fichier `roles/alertmanager/files/alertmanager.yml` contient les paramètres nécessaires pour configurer les notifications par email via Alertmanager. Vous devez modifier ce fichier pour y ajouter vos informations de connexion à un serveur SMTP.  
+
+### Sections à Modifier
+Voici un exemple de la structure à configurer :  
+```yaml
+receivers:
+- name: 'email-alert'
+  email_configs:
+  - send_resolved: true
+    to: ''            # Adresse email du destinataire
+    from: ''          # Adresse email de l'expéditeur
+    smarthost: 'smtp.gmail.com:587'  # Serveur SMTP avec port
+    auth_username: '' # Nom d'utilisateur SMTP (ex : votre adresse Gmail)
+    auth_password: '' # Mot de passe ou clé d'application SMTP
+```
+---
+
 ## Fonctionnement du script d'installation
 
 Le script `install_and_run.sh` automatise l'installation et la configuration des outils nécessaires au projet. Voici les principales étapes :  
