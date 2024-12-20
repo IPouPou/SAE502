@@ -66,6 +66,8 @@ cd SAE502
 ### Exécuter le script d'installation  
 
 ```bash
+sudo su
+chmod +x install_and_run.sh
 ./install_and_run.sh
 ```
 ---
