@@ -28,7 +28,7 @@
           - name: projetsae
             ipv4_address: "{{ groups['grafana'][0] }}"  # Adresse IP pour Grafana
         ports:
-          - "3000:3000"  # Exposer le port de Grafana pour l'accès à l'interface web
+          - ":"  # Exposer le port de Grafana pour l'accès à l'interface web
         env:
           GF_SECURITY_ADMIN_USER: ""     # Utilisateur admin pour Grafana
           GF_SECURITY_ADMIN_PASSWORD: "" # Mot de passe pour l'utilisateur admin de Grafana
@@ -44,5 +44,5 @@
           - name: projetsae
             ipv4_address: "{{ groups['alertmanager'][0] }}"  # Adresse IP pour AlertManager
         ports:
-          - "9093:9093"  # Exposer le port d'AlertManager pour l'accès à l'interface web
+          - ":"  # Exposer le port d'AlertManager pour l'accès à l'interface web
 
