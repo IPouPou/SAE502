@@ -98,4 +98,4 @@ ansible-playbook playbooks/dockernetworkcreate.yml
 ansible-playbook -i inventaire.ini playbooks/deploiementconteneur.yml
 ansible-playbook -i inventaire.ini playbooks/configprometheus.yml
 ansible-playbook -i inventaire.ini playbooks/grafanaconfig.yml
-ansible-playbook -i inventaire.ini playbooks/alertmanager.yml
+
