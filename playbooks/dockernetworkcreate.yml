@@ -11,8 +11,8 @@
 
     - name: Créer un réseau Docker
       community.docker.docker_network:
-        name: projetsae
+        name: 
         driver: bridge
         ipam_config:
-          - subnet: 192.168.10.0/24
+          - subnet: 
         state: present
