@@ -30,8 +30,8 @@
         ports:
           - "3000:3000"  # Exposer le port de Grafana pour l'accès à l'interface web
         env:
-          GF_SECURITY_ADMIN_USER: "admin"     # Utilisateur admin pour Grafana
-          GF_SECURITY_ADMIN_PASSWORD: "quentin" # Mot de passe pour l'utilisateur admin de Grafana
+          GF_SECURITY_ADMIN_USER: ""     # Utilisateur admin pour Grafana
+          GF_SECURITY_ADMIN_PASSWORD: "" # Mot de passe pour l'utilisateur admin de Grafana
 
     # Créer le conteneur AlertManager avec une IP statique et un nom personnalisé
     - name: Créer le conteneur AlertManager avec IP statique
